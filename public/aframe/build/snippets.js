@@ -14,11 +14,8 @@ var peerConnectionConfig = {
   ],
 }
 var globalEvent
-
 var localStream
-
 var dataChannel
-
 var worker
 var global_markerResult
 
