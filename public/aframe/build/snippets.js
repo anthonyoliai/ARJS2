@@ -41,12 +41,9 @@ function start(isCaller) {
     dataChannel.onmessage = handleDataChannelReceiveMessage
     dataChannel.onopen = handleDataChannelStatusChange
     dataChannel.onclose = handleDataChannelStatusChange
+    peerConnection.createOffer().then(createdDescription).catch(errorHandler)
   } else {
     peerConnection.ondatachannel = handleDataChannelCreated
-  }
-
-  if (isCaller) {
-    peerConnection.createOffer().then(createdDescription).catch(errorHandler)
   }
 }
 
@@ -143,7 +140,6 @@ function gotIceCandidate(event) {
 
 function createdDescription(description) {
   console.log('got description')
-
   peerConnection
     .setLocalDescription(description)
     .then(function () {
