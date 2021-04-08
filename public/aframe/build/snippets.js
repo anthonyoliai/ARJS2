@@ -57,7 +57,6 @@ function sendMessageThroughDataChannel() {
 
   // Clear the input box and re-focus it, so that we're
   // ready for the next message.
-
   messageInputBox.value = ''
   messageInputBox.focus()
 }
@@ -65,7 +64,6 @@ function sendMessageThroughDataChannel() {
 // Handle status changes on the local end of the data
 // channel; this is the end doing the sending of data
 // in this example.
-
 function handleDataChannelStatusChange(event) {
   if (dataChannel) {
     console.log('dataChannel status: ' + dataChannel.readyState)
@@ -74,7 +72,6 @@ function handleDataChannelStatusChange(event) {
 
 // Handle onmessage events for the data channel.
 // These are the data messages sent by the remote channel.
-
 function handleDataChannelReceiveMessage(event) {
   var message = event.data
   var message_json = JSON.parse(message)
@@ -90,7 +87,6 @@ function handleDataChannelReceiveMessage(event) {
     }
   }
   //console.log(global_markerResult);
-
   worker.postMessage(global_markerResult)
 }
 
@@ -99,20 +95,16 @@ function handleDataChannelReceiveMessage(event) {
 
 function disconnectPeers() {
   // Close the RTCDataChannel if it's open.
-
   dataChannel.close()
 
   // Close the RTCPeerConnection
-
   peerConnection.close()
-
   dataChannel = null
   peerConnection = null
 }
 
 function gotMessageFromServer(message) {
   if (!peerConnection) start(false)
-
   var signal = JSON.parse(message.data)
 
   // Ignore messages from ourself
@@ -330,7 +322,6 @@ function start(isCaller) {
 
 function handleDataChannelCreated(event) {
   console.log('dataChannel opened')
-
   dataChannel = event.channel
   dataChannel.onmessage = handleDataChannelReceiveMessage
   dataChannel.onopen = handleDataChannelStatusChange
@@ -341,15 +332,11 @@ function sendMessageThroughDataChannel() {
   var message = 'Neando'
   console.log('sending: ' + message)
   dataChannel.send(message)
-
-  // Clear the input box and re-focus it, so that we're
-  // ready for the next message.
 }
 
 // Handle status changes on the local end of the data
 // channel; this is the end doing the sending of data
 // in this example.
-
 function handleDataChannelStatusChange(event) {
   if (dataChannel) {
     console.log('dataChannel status: ' + dataChannel.readyState)
@@ -358,21 +345,17 @@ function handleDataChannelStatusChange(event) {
 
 // Handle onmessage events for the data channel.
 // These are the data messages sent by the remote channel.
-
 function handleDataChannelReceiveMessage(event) {
   console.log('Message: ' + event.data)
 }
 
 // Close the connection, including data channels if it's open.
 // Also update the UI to reflect the disconnected status.
-
 function disconnectPeers() {
   // Close the RTCDataChannel if it's open.
-
   dataChannel.close()
 
   // Close the RTCPeerConnection
-
   peerConnection.close()
 
   dataChannel = null
@@ -410,9 +393,6 @@ function gotMessageFromServer(message) {
 function sendMessage() {
   var message = 'Hello neando'
   dataChannel.send(message)
-
-  // Clear the input box and re-focus it, so that we're
-  // ready for the next message.
 }
 
 function gotIceCandidate(event) {
@@ -441,18 +421,6 @@ function createdDescription(description) {
     })
     .catch(errorHandler)
 }
-
-/**function gotRemoteStream(event) {
-    console.log('got remote stream');
-    remoteVideo.srcObject = event.streams[0];
-    console.log(event.streams[0]);
-    gotStream = true;
-    window.dispatchEvent(new CustomEvent('arjs-video-loaded', {
-        detail: {
-            component: document.querySelector('#arjs-video'),
-        },
-    }));
-}**/
 
 function errorHandler(error) {
   console.log(error)
@@ -524,10 +492,7 @@ function handleNFT(descriptorsUrl, arController) {
         context_process.fillRect(0, 0, pw, ph)
         context_process.drawImage(video, 0, 0, vw, vh, ox, oy, w, h)
         var imageData = context_process.getImageData(0, 0, pw, ph)
-        //var image_neand = context_process.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        //window.location.href=image_neand;
 
-        // Here we start the delay function, which is used to calculate how long it actually takes to process the incoming frame.
         getDelay()
         worker.postMessage(
           {
@@ -645,7 +610,6 @@ function handleNFT(descriptorsUrl, arController) {
         } else {
           _this.context.arController.showObject = false
         }
-
         process()
       }
     }
